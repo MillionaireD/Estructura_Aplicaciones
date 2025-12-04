@@ -3,16 +3,25 @@
 */
 
 // ================== Sidebar collapse ==================
-document.querySelectorAll('#sidebar-wrapper a[data-bs-toggle="collapse"]').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if(target.classList.contains('show')) {
-            target.classList.remove('show'); // cerrar si ya estaba abierto
-        } else {
-            target.classList.add('show'); // abrir si estaba cerrado
-        }
+document.addEventListener("DOMContentLoaded", function(){
+    
+    // Sidebar toggle principal
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    if(sidebarToggle){
+        sidebarToggle.addEventListener("click", function(e){
+            e.preventDefault();
+            document.body.classList.toggle("sb-sidenav-toggled");
+        });
+    }
+
+    // Submenús del sidebar usando Bootstrap Collapse
+    document.querySelectorAll('#sidebar-wrapper [data-bs-toggle="collapse"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            // Bootstrap manejará automáticamente el colapso
+        });
     });
+
 });
 
 // ================== LISTA ENLAZADA ==================
@@ -70,6 +79,8 @@ const listContainer = document.getElementById('listContainer');
 
 // Actualizar visualización
 function renderList() {
+    if (!listContainer) return;
+    
     listContainer.innerHTML = '';
     const elements = list.traverse();
     if (elements.length === 0) {
@@ -84,20 +95,32 @@ function renderList() {
     }
 }
 
-// Botones lista enlazada
-document.getElementById('insertBtn').addEventListener('click', () => {
-    const val = document.getElementById('listData').value.trim();
-    if (val) list.insert(val);
-    renderList();
+// Botones lista enlazada (solo si existen)
+document.addEventListener('DOMContentLoaded', function() {
+    const insertBtn = document.getElementById('insertBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const traverseBtn = document.getElementById('traverseBtn');
+    
+    if (insertBtn) {
+        insertBtn.addEventListener('click', () => {
+            const val = document.getElementById('listData').value.trim();
+            if (val) list.insert(val);
+            renderList();
+        });
+    }
+    
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+            const val = document.getElementById('listData').value.trim();
+            if (val) list.delete(val);
+            renderList();
+        });
+    }
+    
+    if (traverseBtn) {
+        traverseBtn.addEventListener('click', renderList);
+    }
 });
-
-document.getElementById('deleteBtn').addEventListener('click', () => {
-    const val = document.getElementById('listData').value.trim();
-    if (val) list.delete(val);
-    renderList();
-});
-
-document.getElementById('traverseBtn').addEventListener('click', renderList);
 
 // ================== VALIDACIÓN DE PARÉNTESIS ==================
 function areParenthesesBalanced(expr) {
@@ -112,10 +135,14 @@ function areParenthesesBalanced(expr) {
     return stack.length === 0;
 }
 
-// Botón validar
-document.getElementById('validateBtn').addEventListener('click', () => {
-    const exp = document.getElementById('expression').value.trim();
-    const result = exp ? (areParenthesesBalanced(exp) ? 'Balanceado ✅' : 'No balanceado ❌') : 'Ingresa una expresión';
-    document.getElementById('validationResult').textContent = exp + ' -> ' + result;
+// Botón validar (solo si existe)
+document.addEventListener('DOMContentLoaded', function() {
+    const validateBtn = document.getElementById('validateBtn');
+    if (validateBtn) {
+        validateBtn.addEventListener('click', () => {
+            const exp = document.getElementById('expression').value.trim();
+            const result = exp ? (areParenthesesBalanced(exp) ? 'Balanceado ✅' : 'No balanceado ❌') : 'Ingresa una expresión';
+            document.getElementById('validationResult').textContent = exp + ' -> ' + result;
+        });
+    }
 });
-

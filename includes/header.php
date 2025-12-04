@@ -8,11 +8,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Proyecto de Ordenamiento</title>
-    <!-- Bootstrap CSS -->
-    <link href="/css/styles.css" rel="stylesheet" />
-    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="/Labs/css/styles.css"> 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <!-- Bootstrap 5 JS (necesario para el collapse) -->
+    <!-- ORDEN CORRECTO: jQuery primero, luego Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -42,23 +41,40 @@
                     </div>
                 </div>
 
+                <!-- Listas Enlazadas con submenú -->
+                <a class="list-group-item list-group-item-action p-3 d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" href="#listasMenu" role="button"
+                    aria-expanded="<?= $listasAbierto ? 'true' : 'false' ?>" aria-controls="listasMenu">
+                    Listas Enlazadas
+                    <span class="ms-2">▼</span>
+                </a>
+                <div class="collapse <?= $listasAbierto ?>" id="listasMenu">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action ps-5" href="/enlazada.php">Enlazada o Arreglo</a>
+                        <a class="list-group-item list-group-item-action ps-5" href="/enlazada_simple.php">Lista Simplemente Enlazada</a>
+                    </div>
+                </div>
+
+
                 <!-- Laboratorio 3 con submenú -->
                 <a class="list-group-item list-group-item-action p-3 d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" href="#lab3Menu" role="button" aria-expanded="<?= $lab3Abierto ? 'true' : 'false' ?>" aria-controls="lab3Menu">
-                    Laboratorio 2
+                    Mini-Proyecto
                     <span class="ms-2">▼</span>
                 </a>
                 <div class="collapse <?= $lab3Abierto ?>" id="lab3Menu">
                     <div class="list-group">
-                        <a class="list-group-item list-group-item-action ps-5" href="lab3_inicio.php">Inicio</a>
+                        <a class="list-group-item list-group-item-action ps-5" href="/miniproyecto/agenda.php">Inicio</a>
                         <a class="list-group-item list-group-item-action ps-5" href="#">Ejemplo 1</a>
                         <a class="list-group-item list-group-item-action ps-5" href="#">Ejemplo 2</a>
                     </div>
                 </div>
                 <!-- Opción directa para el módulo BFS/DFS -->
                 <a class="list-group-item list-group-item-action p-3" href="/bfs_dfs.php">BFS y DFS</a>
+                <a class="list-group-item list-group-item-action p-3" href="/Labs/crud/crud.php">Crud Simple</a>
                 <a class="list-group-item list-group-item-action p-3" href="/lab2.php">Laboratorio 2</a>
                 <a class="list-group-item list-group-item-action p-3" href="/lab1.php">Laboratorio 1</a>
+
 
             </div>
         </div>

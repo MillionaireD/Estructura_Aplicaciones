@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <button id="insertBtn" class="btn btn-primary">Insertar</button>
                     <button id="deleteBtn" class="btn btn-danger">Eliminar</button>
-                    
+                    <button id="traverseBtn" class="btn btn-secondary">Recorrer</button>
                 </div>
             </div>
 
@@ -67,3 +67,5 @@
 
 <!-- Incluye tu footer -->
 <?php include 'includes/footer.php'; ?>
+
+
